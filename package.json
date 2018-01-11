@@ -1,0 +1,24 @@
+{
+  "name": "discount-timeout",
+  "version": "1.0.0",
+  "description": "Shopify App",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "watch": "nodemon index.js"
+  },
+  "author": "Mihai Blebea",
+  "license": "ISC",
+  "dependencies": {
+    "cookie": "^0.3.1",
+    "dotenv": "^4.0.0",
+    "express": "^4.16.2",
+    "nodemon": "^1.14.10",
+    "nonce": "^1.0.4",
+    "request": "^2.83.0",
+    "request-promise": "^4.2.2",
+    "shopify-api-node": "^2.10.0",
+    "shopify-node-api": "^1.8.0"
+  }
+}
