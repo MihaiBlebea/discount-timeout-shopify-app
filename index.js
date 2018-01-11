@@ -64,14 +64,21 @@ app.get('/callback', (request, response)=> {
     });
 })
 
+// ** Setup shop object with token and shop name ** //
+const shop = new Shopify({
+    shopName: 'mihaidev',
+    accessToken: token
+});
+
 // ** Get products from store ** //
 app.get('/products', (request, response)=> {
-    const shop = new Shopify({
-        shopName: 'mihaidev',
-        accessToken: token
+    shop.product.list({ limit: 5 }).then((result)=> {
+        console.log(result);
+        response.json(JSON.stringify(result));
+    }).catch((err)=> {
+        console.error(err);
+        response.json(JSON.stringify(err));
     });
-
-    shop.product.list({ limit: 5 }).then((result)=> {console.log(result)}).catch((err)=> {console.error(err)});
 })
 
 
