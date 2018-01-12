@@ -81,6 +81,42 @@ app.get('/products', (request, response)=> {
     });
 })
 
+// ** Get all script tags from the shop ** //
+app.get('/get/script', (request, response)=> {
+    shop.scriptTag.list({ limit: 10 }).then((result)=> {
+        response.send(JSON.stringify(result));
+    }).catch((err)=> {
+        response.send(JSON.stringify(err));
+    });
+})
+
+// ** Add a new script tag to the shop ** //
+app.get('/add/script', (request, response)=> {
+    var ev = request.query.event;
+    var src = request.query.src;
+    if(ev !== null && src !== null)
+    {
+        shop.scriptTag.create({
+            event: ev,
+            src: src
+        }).then((result)=> {
+            response.send(JSON.stringify(result));
+        }).catch((err)=> {
+            response.send(JSON.stringify(err));
+        });
+    }
+})
+
+// ** Remove a script tag from the shop ** //
+app.get('/remove/script/:id', (request, response)=> {
+    var id = request.params.id;
+    shop.012.scriptTag.delete(id).then((result)=> {
+        response.send(JSON.stringify(result));
+    }).catch((err)=> {
+        response.send(JSON.stringify(err));
+    });
+})
+
 
 // Instruct app to listen to port
 app.listen(port, () => {
