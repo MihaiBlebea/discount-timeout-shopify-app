@@ -8,6 +8,7 @@ const request = require('request-promise');
 const path = require('path');
 const shopifyAPI = require('shopify-node-api');
 const Shopify = require('shopify-api-node');
+const scriptTag = require('./src/script-tags.js');
 
 const app = express();
 
@@ -91,25 +92,15 @@ app.get('/get/script', (request, response)=> {
     });
 })
 
-app.get('/test/:name', (request, response)=> {
-    let name = request.params.name;
-    response.send({ salut: name });
-})
-
 // ** Add a new script tag to the shop ** //
-app.get('/add/script', (request, response)=> {
+app.get('/set/script/', (request, response)=> {
     var ev = request.query.event;
     var src = request.query.src;
     if(ev !== null && src !== null)
     {
-        shop.scriptTag.create({
-            event: ev,
-            src: src
-        }).then((result)=> {
-            response.send(JSON.stringify(result));
-        }).catch((err)=> {
-            response.send(JSON.stringify(err));
-        });
+        scriptTag.set(src, (result)=> {
+            response.send(result);
+        })
     }
 })
 
