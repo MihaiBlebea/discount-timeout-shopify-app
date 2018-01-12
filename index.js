@@ -84,10 +84,14 @@ app.get('/products', (request, response)=> {
 // ** Get all script tags from the shop ** //
 app.get('/get/script', (request, response)=> {
     shop.scriptTag.list({ limit: 10 }).then((result)=> {
-        response.send(JSON.stringify(result));
+        response.json(JSON.stringify(result));
     }).catch((err)=> {
-        response.send(JSON.stringify(err));
+        response.json(JSON.stringify(err));
     });
+})
+
+app.get('/test/:name', (request, response)=> {
+    response.json({salut: request.params.event});
 })
 
 // ** Add a new script tag to the shop ** //
@@ -100,9 +104,9 @@ app.get('/add/script', (request, response)=> {
             event: ev,
             src: src
         }).then((result)=> {
-            response.send(JSON.stringify(result));
+            response.json(JSON.stringify(result));
         }).catch((err)=> {
-            response.send(JSON.stringify(err));
+            response.json(JSON.stringify(err));
         });
     }
 })
@@ -111,9 +115,9 @@ app.get('/add/script', (request, response)=> {
 app.get('/remove/script/:id', (request, response)=> {
     var id = request.params.id;
     shop.scriptTag.delete(id).then((result)=> {
-        response.send(JSON.stringify(result));
+        response.json(JSON.stringify(result));
     }).catch((err)=> {
-        response.send(JSON.stringify(err));
+        response.json(JSON.stringify(err));
     });
 })
 
