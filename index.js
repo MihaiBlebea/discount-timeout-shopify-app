@@ -36,6 +36,7 @@ var shopAPI = new shopifyAPI(configShop);
 
 // Middleware setup
 app.use(express.static(__dirname + '/admin/build'));
+app.use(express.static(__dirname + '/assets/script-tags'));
 app.use((request, response, next)=> {
     var now = new Date().toString();
     console.log(`${now}: ${request.method} ${request.url}`);
