@@ -26,7 +26,7 @@ const configShop = {
     shop: 'mihaidev', // MYSHOP.myshopify.com
     shopify_api_key: apiKey, // Your API key
     shopify_shared_secret: apiSecret, // Your Shared Secret
-    shopify_scope: 'read_products',
+    shopify_scope: ['read_products', 'read_script_tags', 'write_script_tags'],
     redirect_uri: callback,
     nonce: 'ceva007' // nonce; you must provide a randomly selected value unique for each authorization request
 }
@@ -84,9 +84,9 @@ app.get('/products', (request, response)=> {
 // ** Get all script tags from the shop ** //
 app.get('/get/script', (request, response)=> {
     shop.scriptTag.list({ limit: 10 }).then((result)=> {
-        response.json(JSON.stringify(result));
+        response.send(JSON.stringify(result));
     }).catch((err)=> {
-        response.json(JSON.stringify(err));
+        response.send(JSON.stringify(err));
     });
 })
 
@@ -105,9 +105,9 @@ app.get('/add/script', (request, response)=> {
             event: ev,
             src: src
         }).then((result)=> {
-            response.json(JSON.stringify(result));
+            response.send(JSON.stringify(result));
         }).catch((err)=> {
-            response.json(JSON.stringify(err));
+            response.send(JSON.stringify(err));
         });
     }
 })
@@ -116,9 +116,9 @@ app.get('/add/script', (request, response)=> {
 app.get('/remove/script/:id', (request, response)=> {
     var id = request.params.id;
     shop.scriptTag.delete(id).then((result)=> {
-        response.json(JSON.stringify(result));
+        response.send(JSON.stringify(result));
     }).catch((err)=> {
-        response.json(JSON.stringify(err));
+        response.send(JSON.stringify(err));
     });
 })
 
