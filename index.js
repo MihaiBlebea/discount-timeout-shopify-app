@@ -91,7 +91,8 @@ app.get('/get/script', (request, response)=> {
 })
 
 app.get('/test/:name', (request, response)=> {
-    response.json({salut: request.params.event});
+    let name = request.params.name;
+    response.send({ salut: name });
 })
 
 // ** Add a new script tag to the shop ** //
