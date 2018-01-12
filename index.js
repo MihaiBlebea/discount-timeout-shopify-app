@@ -110,7 +110,7 @@ app.get('/add/script', (request, response)=> {
 // ** Remove a script tag from the shop ** //
 app.get('/remove/script/:id', (request, response)=> {
     var id = request.params.id;
-    shop.012.scriptTag.delete(id).then((result)=> {
+    shop.scriptTag.delete(id).then((result)=> {
         response.send(JSON.stringify(result));
     }).catch((err)=> {
         response.send(JSON.stringify(err));
