@@ -68,7 +68,7 @@
 
         let out = `<div class="note form-success" style="width:100%;display:flex;justify-content:center;text-align: center;">`;
 
-        if(payload.days == 0 && payload.hours == 0 && payload.minutes == 0 && payload.seconds == 0)
+        if(payload.days !== 0 && payload.hours !== 0 && payload.minutes !== 0 && payload.seconds !== 0)
         {
             for(let i = 0; i < timeSpams.length; i++)
             {
