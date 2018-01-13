@@ -5,13 +5,17 @@
     if(el !== null)
     {
         getConfig('https://discount-timeout.herokuapp.com/get/config', (response)=> {
+            let today = new Date();
+            let timeout = new Date().setDate(today.getDate() + 3);
 
-                console.log(response)
+            if(response.timeout !== null)
+            {
+                timeout = response.timeout;
+            }
 
-                let today = new Date();
-                let timeout = '2018/06/22 18:20:20';
-
-                tick();
+            // Call the tick method to start countdown 
+            // Pass the final date of the promotion to the method
+            tick(timeout);
         })
     }
 
@@ -47,11 +51,10 @@
         }
     }
 
-    function tick()
+    function tick(timeout)
     {
         setInterval(function() {
             let today = new Date().toString();
-            let timeout = '2018/01/14 10:20:20';
             let diff = compare(stringToUnix(today), stringToUnix(timeout));
             let tick = render(msToTime(diff));
             el.innerHTML = tick;
