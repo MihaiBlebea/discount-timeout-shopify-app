@@ -6,15 +6,13 @@
     {
         getConfig('https://discount-timeout.herokuapp.com/get/config', (response)=> {
 
-                response.json().then((json)=> {
-                    console.log(json);
-                });
+                console.log(response)
 
                 let today = new Date();
                 let timeout = '2018/06/22 18:20:20';
 
                 tick();
-    
+
         })
     }
 
@@ -57,7 +55,6 @@
             let timeout = '2018/01/14 10:20:20';
             let diff = compare(stringToUnix(today), stringToUnix(timeout));
             let tick = render(msToTime(diff));
-            console.log(tick)
             el.innerHTML = tick;
         }, 1000)
     }
@@ -84,6 +81,7 @@
     function getConfig(url, callback)
     {
         fetch(url, { method: 'GET', mode: 'no-cors', headers: { Accept: 'application/json'}}).then((response)=> {
+            console.log('first response', response)
             callback(response);
         }).catch((err)=> {
             console.log(err);
