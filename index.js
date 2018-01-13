@@ -92,7 +92,7 @@ app.get('/products', (request, response)=> {
 
 // ** Get products from store ** //
 app.get('/get/config', (request, response)=> {
-    response.json(JSON.stringify({name: 'Serban'}));
+    response.json({name: 'Serban'});
 })
 
 // ** Get all script tags from the shop ** //
