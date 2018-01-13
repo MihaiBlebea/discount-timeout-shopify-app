@@ -54,9 +54,12 @@
 
     function tick(timeout)
     {
+        console.log(timeout)
         setInterval((timeout)=> {
+            console.log(timeout)
             let today = new Date().toString();
             let diff = compare(stringToUnix(today), stringToUnix(timeout));
+            console.log(diff)
             let tick = render(msToTime(diff));
             el.innerHTML = tick;
         }, 1000)
