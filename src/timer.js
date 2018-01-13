@@ -81,7 +81,7 @@
 
     function getConfig(url, callback)
     {
-        fetch(url, {mode: 'cors'}).then((response)=> {
+        fetch(url, {method: 'GET', mode: 'cors'}).then((response)=> {
             callback(response);
         }).catch((err)=> {
             console.log(err);
