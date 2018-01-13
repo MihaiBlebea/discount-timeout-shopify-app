@@ -9,6 +9,7 @@ const path = require('path');
 const shopifyAPI = require('shopify-node-api');
 const Shopify = require('shopify-api-node');
 const scriptTag = require('./src/script-tags.js');
+const con = require('./src/database/connect.js')
 
 const app = express();
 
@@ -133,6 +134,15 @@ app.get('/remove/script/:id', (request, response)=> {
         response.send(JSON.stringify(result));
     }).catch((err)=> {
         response.send(JSON.stringify(err));
+    });
+})
+
+// ** Get data from the database ** //
+app.get('/get/data', (request, response)=> {
+    var foo = con.ref('store');
+    foo.once('value', function(snapshot) {
+        console.log(snapshot.val());
+        response.send(JSON.stringify(snapshot.val()))
     });
 })
 
