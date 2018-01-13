@@ -95,7 +95,7 @@ app.get('/get/script', (request, response)=> {
 // ** Add a new script tag to the shop ** //
 app.get('/set/script/', (request, response)=> {
     var src = request.query.src;
-    if(ev !== null && src !== null)
+    if(src !== null)
     {
         scriptTag.set(src, (result)=> {
             response.send(result);
@@ -106,7 +106,7 @@ app.get('/set/script/', (request, response)=> {
 // ** Update tag to the shop ** //
 app.get('/update/script/', (request, response)=> {
     var src = request.query.src;
-    if(ev !== null && src !== null)
+    if(src !== null)
     {
         scriptTag.update(src, (result)=> {
             response.send(result);
