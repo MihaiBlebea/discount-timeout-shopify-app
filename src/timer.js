@@ -64,26 +64,22 @@
     {
         let minutes = (payload.minutes < 10) ? "0" + payload.minutes : payload.minutes;
         let seconds = (payload.seconds < 10) ? "0" + payload.seconds : payload.seconds;
+        let timeSpams = [payload.days, payload.hours, minutes, seconds];
 
-        let out =   `<div class="note form-success" style="width:100%;display:flex;justify-content:center;
-                                                           color: #56ad6a;
-                                                           background-color: #ecfef0;
-                                                           border-color: #56ad6a;
-                                                           border-top-color: rgb(86, 173, 106);
-                                                           border-right-color: rgb(86, 173, 106);
-                                                           border-bottom-color: rgb(86, 173, 106);
-                                                           border-left-color: rgb(86, 173, 106)">
-                        <div style="margin-right: 10px;">${payload.days} days</div>
-                        <div style="margin-right: 10px;">${payload.hours} hours</div>
-                        <div style="margin-right: 10px;">${minutes} minutes</div>
-                        <div>${seconds} seconds</div>
-                    </div>`;
+        let out = `<div class="note form-success" style="width:100%;display:flex;justify-content:center;text-align: center;">`;
 
-        let expire =    `<div class="note form-success" style="width:100%;text-align:center;">
-                            This offer has expired. Stay close for more special offers!
-                        </div>`;
+        if(payload.days == 0 && payload.hours == 0 && payload.minutes == 0 && payload.seconds == 0)
+        {
+            for(let i = 0; i < timeSpams.length; i++)
+            {
+                out += `<div ${(i == (timeSpams.length - 1)) ? '' : style="margin-right: 10px;"}>${timeSpams[i]} days</div>`;
+            }
+        } else {
+            out += `This offer has expired. Stay close for more special offers!`;
+        }
+        out += `</div>`;
 
-        return (payload.days == 0 && payload.hours == 0 && payload.minutes == 0 && payload.seconds == 0) ? expire : out;
+        return out;
     }
 
     function getConfig(url, callback)
