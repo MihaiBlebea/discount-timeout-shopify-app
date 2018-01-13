@@ -12,7 +12,6 @@
                 let timeout = '2018/06/22 18:20:20';
 
                 tick();
-
         })
     }
 
@@ -80,7 +79,7 @@
 
     function getConfig(url, callback)
     {
-        fetch(url, { method: 'GET', mode: 'no-cors', headers: { Accept: 'application/json'}}).then((response)=> {
+        fetch(url, { method: 'GET', mode: 'cors', headers: { Accept: 'application/json'}}).then((response)=> {
             console.log('first response', response)
             callback(response);
         }).catch((err)=> {
