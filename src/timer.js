@@ -10,13 +10,11 @@
 
             if(response.timeout !== null)
             {
-                console.log(response.timeout)
                 timeout = response.timeout;
             }
-            console.log(timeout);
             // Call the tick method to start countdown
-            
-            tick();
+            // Pass the final date and time to this method as string
+            tick(timeout);
         })
     }
 
@@ -52,16 +50,14 @@
         }
     }
 
-    function tick()
+    function tick(timeout)
     {
         setInterval(function() {
-            console.log(timeout)
             let today = new Date().toString();
             let diff = compare(stringToUnix(today), stringToUnix(timeout));
-            console.log(diff)
             let tick = render(msToTime(diff));
             el.innerHTML = tick;
-        }, 1000)
+        }, 1000, timeout)
     }
 
     function render(payload)
