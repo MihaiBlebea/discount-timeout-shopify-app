@@ -55,7 +55,7 @@
     function tick(timeout)
     {
         console.log(timeout)
-        setInterval((timeout)=> {
+        setInterval(function(timeout) {
             console.log(timeout)
             let today = new Date().toString();
             let diff = compare(stringToUnix(today), stringToUnix(timeout));
