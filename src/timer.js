@@ -72,7 +72,7 @@
         {
             for(let i = 0; i < timeSpams.length; i++)
             {
-                out += `<div ${(i == (timeSpams.length - 1)) ? '' : style="margin-right: 10px;"}>${timeSpams[i]} days</div>`;
+                out += `<div ${(i == (timeSpams.length - 1)) ? '' : 'style="margin-right: 10px;"'}>${timeSpams[i]} days</div>`;
             }
         } else {
             out += `This offer has expired. Stay close for more special offers!`;
