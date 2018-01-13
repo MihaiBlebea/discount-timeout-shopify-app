@@ -4,12 +4,15 @@
 
     if(el !== null)
     {
-        getConfig('https://discount-timeout.herokuapp.com/get/config', (result)=> {
-            console.log(result);
-            let today = new Date();
-            let timeout = '2018/06/22 18:20:20';
+        getConfig('https://discount-timeout.herokuapp.com/get/config', (response)=> {
+            if(response.status == 200)
+            {
+                console.log(response);
+                let today = new Date();
+                let timeout = '2018/06/22 18:20:20';
 
-            tick();
+                tick();
+            }
         })
     }
 
@@ -78,7 +81,7 @@
 
     function getConfig(url, callback)
     {
-        fetch(url).then((response)=> {
+        fetch(url, {mode: 'cors'}).then((response)=> {
             callback(response);
         }).catch((err)=> {
             console.log(err);
