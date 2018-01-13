@@ -83,6 +83,11 @@ app.get('/products', (request, response)=> {
     });
 })
 
+// ** Get products from store ** //
+app.get('/get/config', (request, response)=> {
+    response.json(JSON.stringify({name: 'Serban'}));
+})
+
 // ** Get all script tags from the shop ** //
 app.get('/get/script', (request, response)=> {
     shop.scriptTag.list({ limit: 10 }).then((result)=> {

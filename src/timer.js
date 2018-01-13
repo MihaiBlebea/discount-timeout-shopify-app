@@ -4,10 +4,13 @@
 
     if(el !== null)
     {
-        let today = new Date();
-        let timeout = '2018/06/22 18:20:20';
+        getConfig('https://discount-timeout.herokuapp.com/get/config', (result)=> {
+            console.log(result);
+            let today = new Date();
+            let timeout = '2018/06/22 18:20:20';
 
-        tick();
+            tick();
+        })
     }
 
     function compare(start, end)
@@ -32,10 +35,6 @@
         var minutes = parseInt((duration / (1000 * 60)) % 60)
         var hours = parseInt((duration / (1000 * 60 * 60)) % 24)
         var days = parseInt((duration / (1000 * 60 * 60 * 24)))
-
-        // hours = (hours < 10) ? "0" + hours : hours;
-        minutes = (minutes < 10) ? "0" + minutes : minutes;
-        seconds = (seconds < 10) ? "0" + seconds : seconds;
 
         return {
             days,
@@ -75,6 +74,15 @@
                         </div>`
 
         return (payload.days == 0 && payload.hours == 0 && payload.minutes == 0 && payload.seconds == 0) ? expire : out;
+    }
+
+    function getConfig(url, callback)
+    {
+        fetch(url).then((response)=> {
+            callback(response);
+        }).catch((err)=> {
+            console.log(err);
+        });
     }
 
 })();
