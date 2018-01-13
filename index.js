@@ -38,6 +38,13 @@ var shopAPI = new shopifyAPI(configShop);
 // Middleware setup
 app.use(express.static(__dirname + '/admin/build'));
 app.use(express.static(__dirname + '/assets'));
+app.use(function (req, res, next) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    next();
+});
 app.use((request, response, next)=> {
     var now = new Date().toString();
     console.log(`${now}: ${request.method} ${request.url}`);
