@@ -1,9 +1,14 @@
 (function() {
-    let el = document.getElementById('discount-timeout');
-    let today = new Date();
-    let timeout = '2018/06/22 18:20:20';
-
     alert('Script tag is mounted and activated')
+    let el = document.getElementById('discount-timeout');
+    
+    if(el !== null)
+    {
+        let today = new Date();
+        let timeout = '2018/06/22 18:20:20';
+
+        tick();
+    }
 
     function compare(start, end)
     {
@@ -62,7 +67,5 @@
                     <div>${payload.seconds} seconds</div>
                 </div>`;
     }
-
-    tick();
 
 })();
