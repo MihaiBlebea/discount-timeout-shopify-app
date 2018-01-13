@@ -6,7 +6,11 @@
     {
         getConfig('https://discount-timeout.herokuapp.com/get/config', (response)=> {
 
-                console.log(response.json())
+                response.json().then((result)=> {
+                    console.log(result)
+                }).catch((err)=> {
+                    console.log(err)
+                })
 
                 let today = new Date();
                 let timeout = '2018/06/22 18:20:20';
