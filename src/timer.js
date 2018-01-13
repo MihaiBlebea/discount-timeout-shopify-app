@@ -3,41 +3,48 @@
     let timeout = '2018/06/22 18:20:20';
 
     alert(timeout)
-    
-    function compare(tsStart, tsEnd)
+
+    function compare(start, end)
     {
-        let diff = tsEnd - tsStart;
-        return new Date(diff)
+      let diff = end - start;
+      return diff;
     }
 
-    function stringToDate(string)
+    function stringToUnix(string)
     {
-        let date = new Date(string)
-        let day = date.getDate();
-        let month = date.getMonth() + 1;
-        let year = date.getFullYear();
-
-        let second = date.getSeconds();
-        let minute = date.getMinutes();
-        let hour = date.getHours();
-
-        return {
-            year: year,
-            month: month,
-            day: day,
-            hour: hour,
-            minute: minute,
-            second: second
-        }
-    }
-
-    function format(time)
-    {
-        if(time.toString().length < 2)
+        let date = new Date(string);
+        if(typeof date == 'object')
         {
-            return '0' + time;
+             return parseInt((date.getTime()).toFixed(0))
         }
-        return time;
     }
+
+    function msToTime(duration)
+    {
+        var milliseconds = parseInt((duration % 1000) / 100)
+        var seconds = parseInt((duration / 1000) % 60)
+        var minutes = parseInt((duration / (1000 * 60)) % 60)
+        var hours = parseInt((duration / (1000 * 60 * 60)) % 24)
+        var days = parseInt((duration / (1000 * 60 * 60 * 24)))
+
+        hours = (hours < 10) ? "0" + hours : hours;
+        minutes = (minutes < 10) ? "0" + minutes : minutes;
+        seconds = (seconds < 10) ? "0" + seconds : seconds;
+
+        return days + " days " + hours + ":" + minutes + ":" + seconds;
+    }
+
+    function tick()
+    {
+        setInterval(function() {
+            let today = new Date().toString();
+            let timeout = '2018/01/14 10:20:20';
+            let diff = compare(stringToUnix(today), stringToUnix(timeout));
+            let tick = msToTime(diff);
+            console.log(tick)
+        }, 1000)
+    }
+
+    tick();
 
 })();
