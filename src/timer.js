@@ -10,10 +10,11 @@
 
             if(response.timeout !== null)
             {
+                console.log(response.timeout)
                 timeout = response.timeout;
             }
-
-            // Call the tick method to start countdown 
+            console.log(timeout);
+            // Call the tick method to start countdown
             // Pass the final date of the promotion to the method
             tick(timeout);
         })
@@ -53,7 +54,7 @@
 
     function tick(timeout)
     {
-        setInterval(function() {
+        setInterval((timeout)=> {
             let today = new Date().toString();
             let diff = compare(stringToUnix(today), stringToUnix(timeout));
             let tick = render(msToTime(diff));
