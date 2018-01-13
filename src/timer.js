@@ -74,14 +74,14 @@
 
         let expire =    `<div class="note form-success" style="width:100%;text-align:center;">
                             This offer has expired. Stay close for more special offers!
-                        </div>`
+                        </div>`;
 
         return (payload.days == 0 && payload.hours == 0 && payload.minutes == 0 && payload.seconds == 0) ? expire : out;
     }
 
     function getConfig(url, callback)
     {
-        fetch(url, {method: 'GET', mode: 'cors'}).then((response)=> {
+        fetch(url, { method: 'GET', mode: 'no-cors', headers: { Accept: 'application/json'}}).then((response)=> {
             callback(response);
         }).catch((err)=> {
             console.log(err);
