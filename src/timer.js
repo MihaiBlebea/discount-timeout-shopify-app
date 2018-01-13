@@ -1,7 +1,7 @@
 (function() {
-    alert('Script tag is mounted and activated')
+    console.log('Script tag is mounted and activated')
     let el = document.getElementById('discount-timeout');
-    
+
     if(el !== null)
     {
         let today = new Date();
@@ -60,12 +60,21 @@
 
     function render(payload)
     {
-        return `<div style="display:flex;">
-                    <div style="margin-right: 10px;">${payload.days} days</div>
-                    <div style="margin-right: 10px;">${payload.hours} hours</div>
-                    <div style="margin-right: 10px;">${payload.minutes} minutes</div>
-                    <div>${payload.seconds} seconds</div>
-                </div>`;
+        let minutes = (payload.minutes < 10) ? "0" + payload.minutes : payload.minutes;
+        let seconds = (payload.seconds < 10) ? "0" + payload.seconds : payload.seconds;
+
+        let out =   `<div class="note form-success" style="width:100%;display:flex;justify-content:center;">
+                        <div style="margin-right: 10px;">${payload.days} days</div>
+                        <div style="margin-right: 10px;">${payload.hours} hours</div>
+                        <div style="margin-right: 10px;">${minutes} minutes</div>
+                        <div>${seconds} seconds</div>
+                    </div>`;
+
+        let expire =    `<div class="note form-success" style="width:100%;text-align:center;">
+                            This offer has expired. Stay close for more special offers!
+                        </div>`
+
+        return (payload.days == 0 && payload.hours == 0 && payload.minutes == 0 && payload.seconds == 0) ? expire : out;
     }
 
 })();
