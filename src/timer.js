@@ -15,8 +15,8 @@
             }
             console.log(timeout);
             // Call the tick method to start countdown
-            // Pass the final date of the promotion to the method
-            tick(timeout);
+            
+            tick();
         })
     }
 
@@ -52,10 +52,9 @@
         }
     }
 
-    function tick(timeout)
+    function tick()
     {
-        console.log(timeout)
-        setInterval(function(timeout) {
+        setInterval(function() {
             console.log(timeout)
             let today = new Date().toString();
             let diff = compare(stringToUnix(today), stringToUnix(timeout));
