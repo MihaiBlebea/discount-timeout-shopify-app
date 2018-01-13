@@ -1,5 +1,5 @@
 (function() {
-    console.log('Script tag is mounted and activated')
+    console.log(`Script is activated at ${new Date().toString()}`)
     let el = document.getElementById('discount-timeout');
 
     if(el !== null)
@@ -76,6 +76,7 @@
                             This offer has expired. Stay close for more special offers!
                         </div>`;
 
+        console.log(`Component is showed at ${new Date().toString()}`)
         return (payload.days == 0 && payload.hours == 0 && payload.minutes == 0 && payload.seconds == 0) ? expire : out;
     }
 
