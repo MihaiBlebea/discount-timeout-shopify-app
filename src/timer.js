@@ -5,8 +5,7 @@
     if(el !== null)
     {
         getConfig('https://discount-timeout.herokuapp.com/get/config', (response)=> {
-            if(response.status == 200)
-            {
+
                 response.json().then((json)=> {
                     console.log(json);
                 });
@@ -15,7 +14,7 @@
                 let timeout = '2018/06/22 18:20:20';
 
                 tick();
-            }
+    
         })
     }
 
