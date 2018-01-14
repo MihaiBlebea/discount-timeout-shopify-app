@@ -29,11 +29,18 @@ function getTimerConfig(name, timer, callback)
     });
 }
 
-// to do
-function setShopToken(token, callback)
+function setShopToken(name, token, callback)
 {
-    connect.ref(`shop/${name}`).set(payload, (error)=> {
+    var payload = {token: token, name: name};
+    connect.ref(`tokens/${name}`).set(payload, (error)=> {
         callback(error);
+    });
+}
+
+function getShopToken(name, callback)
+{
+    connect.ref(`tokens/${name}`).once('value', function(snapshot) {
+        callback(snapshot.val())
     });
 }
 
@@ -41,5 +48,7 @@ module.exports = {
     getShopConfig,
     setShopConfig,
     deleteShopConfig,
-    getTimerConfig
+    getTimerConfig,
+    setShopToken,
+    getShopToken
 }

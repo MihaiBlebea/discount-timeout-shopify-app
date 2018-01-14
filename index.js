@@ -70,10 +70,11 @@ app.get('/shopify', (request, response)=> {
 // ** THe callback that receives the token after auth ** //
 app.get('/callback', (request, response)=> {
     query_params = request.query;
+    var shopName = query_params.shop.split('.')[0];
     shopAPI.exchange_temporary_token(query_params, (err, data)=> {
-        console.log(err);
-        console.log(data);
-        response.send(JSON.stringify(query_params.shop))
+        db.setShopToken(shopName, data['token'], (error)=> {
+            response.send(JSON.stringify(error))
+        })
     });
 })
 
