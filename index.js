@@ -25,18 +25,18 @@ const port = process.env.PORT || 3000;
 // Create the callback url for authentication
 const callback = httpTunnel + '/callback';
 
-// // Create the config object
-// const configShop = {
-//     shop: 'mihaidev', // MYSHOP.myshopify.com
-//     shopify_api_key: apiKey, // Your API key
-//     shopify_shared_secret: apiSecret, // Your Shared Secret
-//     shopify_scope: ['read_products', 'read_script_tags', 'write_script_tags', 'read_themes', 'write_themes'],
-//     redirect_uri: callback,
-//     nonce: nonce // nonce; you must provide a randomly selected value unique for each authorization request
-// }
-//
-// // Create the Shopify API object
-// var shopAPI = new shopifyAPI(configShop);
+// Create the config object
+const configShop = {
+    shop: 'mihaidev', // MYSHOP.myshopify.com
+    shopify_api_key: apiKey, // Your API key
+    shopify_shared_secret: apiSecret, // Your Shared Secret
+    shopify_scope: ['read_products', 'read_script_tags', 'write_script_tags', 'read_themes', 'write_themes'],
+    redirect_uri: callback,
+    nonce: 'serban' // nonce; you must provide a randomly selected value unique for each authorization request
+}
+
+// Create the Shopify API object
+var shopAPI = new shopifyAPI(configShop);
 
 // Middleware setup
 app.use(express.static(__dirname + '/admin/build'));
@@ -63,15 +63,6 @@ app.get('/', (request, response) => {
 
 // ** Install app route ** //
 app.get('/shopify/:shop', (request, response)=> {
-    var configShop = {
-        shop: request.params.shop, // MYSHOP.myshopify.com
-        shopify_api_key: apiKey, // Your API key
-        shopify_shared_secret: apiSecret, // Your Shared Secret
-        shopify_scope: ['read_products', 'read_script_tags', 'write_script_tags', 'read_themes', 'write_themes'],
-        redirect_uri: callback,
-        nonce: 'serban' // nonce; you must provide a randomly selected value unique for each authorization request
-    }
-    var shopAPI = new shopifyAPI(configShop);
     var auth_url = shopAPI.buildAuthURL();
     response.redirect(auth_url);
 })
