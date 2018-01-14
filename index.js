@@ -6,10 +6,12 @@ const nonce = require('nonce')(); // This is already called as a function
 const querystring = require('querystring');
 const request = require('request-promise');
 const path = require('path');
+const bodyParser = require('body-parser');
 const shopifyAPI = require('shopify-node-api');
 const Shopify = require('shopify-api-node');
 const scriptTag = require('./src/script-tags.js');
-const con = require('./src/database/connect.js')
+const con = require('./src/database/connect.js');
+const db = require('./src/database/database.js');
 
 const app = express();
 
@@ -46,6 +48,8 @@ app.use(function (req, res, next) {
     res.setHeader('Access-Control-Allow-Credentials', true);
     next();
 });
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
 app.use((request, response, next)=> {
     var now = new Date().toString();
     console.log(`${now}: ${request.method} ${request.url}`);
@@ -140,20 +144,26 @@ app.get('/remove/script/:id', (request, response)=> {
 // ** Get data from the database ** //
 app.get('/get/data/:shop', (request, response)=> {
     var shopName = request.params.shop;
-    var data = con.ref(`store/${shopName}`).once('value', function(snapshot) {
-        console.log(snapshot.val());
-        response.send(JSON.stringify(snapshot.val()))
-    });
+    db.getShopConfig(shopName, (data)=> {
+        response.send(JSON.stringify(data))
+    })
 })
 
 // ** Set data to the database ** //
 app.post('/set/data/:shop', (request, response)=> {
     var shopName = request.params.shop;
-    var data = con.ref(`store/${shopName}`).set({
-        name: shopName
-    }, (error)=> {
+    var payload = request.body;
+    db.setShopConfig(shopName, payload, (error)=> {
         response.send(JSON.stringify(error))
-    });
+    })
+})
+
+// ** Delete data from database ** //
+app.get('/delete/data/:shop', (request, response)=> {
+    var shopName = request.params.shop;
+    db.deleteShopConfig(shopName, (error)=> {
+        response.send(JSON.stringify(error))
+    })
 })
 
 

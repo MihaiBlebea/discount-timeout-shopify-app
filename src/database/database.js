@@ -1,11 +1,28 @@
 const connect = require('./connect.js');
 
-function store(document, database)
+function getShopConfig(name, callback)
 {
-    var call = connect.ref(database).push(document).key;
-    return call;
+    connect.ref(`shop/${name}`).once('value', function(snapshot) {
+        callback(snapshot.val())
+    });
+}
+
+function setShopConfig(name, payload, callback)
+{
+    connect.ref(`shop/${name}`).set(payload, (error)=> {
+        callback(error);
+    });
+}
+
+function deleteShopConfig(name, callback)
+{
+    connect.ref(`shop/${name}`).set(null, (error)=> {
+        callback(error);
+    })
 }
 
 module.exports = {
-    store
+    getShopConfig,
+    setShopConfig,
+    deleteShopConfig
 }
