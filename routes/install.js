@@ -1,6 +1,6 @@
 const express = require('express');
 const authApi = require('../src/api/auth.js');
-const store = require('../src/api/shopify.js');
+const db = require('../src/database/database.js');
 
 const router = new express.Router();
 
@@ -13,10 +13,19 @@ router.get('/shopify', (request, response)=> {
 // Callback
 router.get('/callback', (request, response)=> {
     query_params = request.query;
-    // var shopName = query_params.shop.split('.')[0];
     authApi.exchange_temporary_token(query_params, (err, data)=> {
+        let token = data['token'];
         authApi.get('/admin/shop.json', (err, data, headers)=> {
             response.send(JSON.stringify(data))
+            var payload = {
+                shop: data.shop.name,
+                email: data.shop.email,
+                token: token
+            }
+            response.send(JSON.stringify(token))
+            // db.setShopToken(payload, data['token'], (error)=> {
+            //     response.send(JSON.stringify(error))
+            // })
         })
         // db.setShopToken(shopName, data['token'], (error)=> {
         //     response.send(JSON.stringify(error))
