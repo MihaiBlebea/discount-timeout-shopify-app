@@ -74,7 +74,7 @@ app.get('/callback', (request, response)=> {
     shopAPI.exchange_temporary_token(query_params, (err, data)=> {
         console.log(err);
         console.log(data);
-        response.send(data['access_token'])
+        response.send(JSON.stringify(data))
     });
 })
 
