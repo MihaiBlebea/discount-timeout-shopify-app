@@ -4,7 +4,7 @@
 
     if(el !== null)
     {
-        getConfig('https://discount-timeout.herokuapp.com/get/config', (response)=> {
+        getConfig('https://discount-timeout.herokuapp.com/get/config/{{shop.name}}', (response)=> {
             let today = new Date();
             let timeout = new Date().setDate(today.getDate() + 3);
 
