@@ -169,12 +169,18 @@ app.get('/delete/data/:shop', (request, response)=> {
     })
 })
 
+// ** Get configuration for a specific timer ** //
 app.get('/get/timer/:shop', (request, response)=> {
     var shopName = request.params.shop;
     var timer = request.query.timer;
     db.getTimerConfig(shopName, timer, (data)=> {
         response.send(JSON.stringify(data))
     })
+})
+
+// ** Create a snippet of code ** //
+app.get('/insert/snippet', (request, response)=> {
+    response.sendFile(path.join(__dirname, 'assets', 'snippets', 'timer.liquid'));
 })
 
 
