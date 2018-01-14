@@ -5,7 +5,7 @@
     if(el !== null)
     {
         let timerId = el.dataset.id;
-        getConfig('https://discount-timeout.herokuapp.com/get/config/{{shop.name}}', (response)=> {
+        getConfig('https://discount-timeout.herokuapp.com/get/config/' + getShopName() + '?timer=' + timerId, (response)=> {
             let today = new Date();
             let timeout = new Date().setDate(today.getDate() + 3);
 
@@ -17,6 +17,13 @@
             // Pass the final date and time to this method as string
             tick(timeout);
         })
+    }
+
+    function getShopName()
+    {
+        let url = window.location.href;
+        let urlSplits = url.split('.');
+        return urlSplits[0].substr(8, urlSplits[0].length);
     }
 
     function compare(start, end)
