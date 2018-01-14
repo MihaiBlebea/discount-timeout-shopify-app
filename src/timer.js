@@ -64,7 +64,11 @@
     {
         let minutes = (payload.minutes < 10) ? "0" + payload.minutes : payload.minutes;
         let seconds = (payload.seconds < 10) ? "0" + payload.seconds : payload.seconds;
-        let timeSpams = [payload.days, payload.hours, minutes, seconds];
+        let timeSpams = [
+            { label: 'days', value: payload.days },
+            { label: 'hours', value: payload.hours },
+            { label: 'minutes', value: minutes },
+            { label: 'seconds', value: seconds }];
 
         let out = `<div class="note form-success" style="width:100%;display:flex;justify-content:center;text-align: center;">`;
 
@@ -72,7 +76,7 @@
         {
             for(let i = 0; i < timeSpams.length; i++)
             {
-                out += `<div ${(i == (timeSpams.length - 1)) ? '' : 'style="margin-right: 10px;"'}>${timeSpams[i]} days</div>`;
+                out += `<div ${(i == (timeSpams.length - 1)) ? '' : 'style="margin-right: 10px;"'}>${timeSpams[i].value} ${timeSpams[i].label}</div>`;
             }
         } else {
             out += `This offer has expired. Stay close for more special offers!`;

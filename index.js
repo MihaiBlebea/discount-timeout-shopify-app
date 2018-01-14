@@ -138,11 +138,21 @@ app.get('/remove/script/:id', (request, response)=> {
 })
 
 // ** Get data from the database ** //
-app.get('/get/data', (request, response)=> {
-    var foo = con.ref('store');
-    foo.once('value', function(snapshot) {
+app.get('/get/data/:shop', (request, response)=> {
+    var shopName = request.params.shop;
+    var data = con.ref(`store/${shopName}`).once('value', function(snapshot) {
         console.log(snapshot.val());
         response.send(JSON.stringify(snapshot.val()))
+    });
+})
+
+// ** Set data to the database ** //
+app.post('/set/data/:shop', (request, response)=> {
+    var shopName = request.params.shop;
+    var data = con.ref(`store/${shopName}`).set({
+        name: shopName
+    }, (error)=> {
+        response.send(JSON.stringify(error))
     });
 })
 
