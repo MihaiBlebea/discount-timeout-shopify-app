@@ -96,8 +96,11 @@ app.get('/products', (request, response)=> {
 })
 
 // ** Get products from store ** //
-app.get('/get/config', (request, response)=> {
-    response.send(JSON.stringify({ timeout: '2018/02/22 18:02:22' }));
+app.get('/get/config/:shop', (request, response)=> {
+    var shopName = request.params.shop;
+    db.getShopConfig(shopName, (data)=> {
+        response.send(JSON.stringify(data))
+    })
 })
 
 // ** Get all script tags from the shop ** //
