@@ -63,7 +63,7 @@ app.get('/', (request, response) => {
 
 // ** Install app route ** //
 app.get('/shopify/:shop', (request, response)=> {
-    const configShop = {
+    var configShop = {
         shop: request.params.shop, // MYSHOP.myshopify.com
         shopify_api_key: apiKey, // Your API key
         shopify_shared_secret: apiSecret, // Your Shared Secret
@@ -79,7 +79,7 @@ app.get('/shopify/:shop', (request, response)=> {
 // ** THe callback that receives the token after auth ** //
 app.get('/callback', (request, response)=> {
     query_params = request.query;
-    var shopName = query_params.shop.split('.')[0];
+    // var shopName = query_params.shop.split('.')[0];
     shopAPI.exchange_temporary_token(query_params, (err, data)=> {
         // db.setShopToken(shopName, data['token'], (error)=> {
         //     response.send(JSON.stringify(error))
