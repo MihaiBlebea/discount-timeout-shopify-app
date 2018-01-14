@@ -173,7 +173,7 @@ app.get('/get/timer/:shop', (request, response)=> {
     var shopName = request.params.shop;
     var timer = request.query.timer;
     db.getTimerConfig(shopName, timer, (data)=> {
-        response.json(JSON.stringify(data))
+        response.send(JSON.stringify(data))
     })
 })
 
