@@ -29,6 +29,14 @@ function getTimerConfig(name, timer, callback)
     });
 }
 
+// to do
+function setShopToken(token, callback)
+{
+    connect.ref(`shop/${name}`).set(payload, (error)=> {
+        callback(error);
+    });
+}
+
 module.exports = {
     getShopConfig,
     setShopConfig,
