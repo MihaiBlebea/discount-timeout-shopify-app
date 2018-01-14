@@ -69,7 +69,7 @@ app.get('/shopify/:shop', (request, response)=> {
         shopify_shared_secret: apiSecret, // Your Shared Secret
         shopify_scope: ['read_products', 'read_script_tags', 'write_script_tags', 'read_themes', 'write_themes'],
         redirect_uri: callback,
-        nonce: nonce // nonce; you must provide a randomly selected value unique for each authorization request
+        nonce: 'serban' // nonce; you must provide a randomly selected value unique for each authorization request
     }
     var shopAPI = new shopifyAPI(configShop);
     var auth_url = shopAPI.buildAuthURL();
