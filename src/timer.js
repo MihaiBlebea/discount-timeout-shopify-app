@@ -4,8 +4,8 @@
 
     if(el !== null)
     {
-        let timerId = el.dataset.id;
-        getConfig('https://discount-timeout.herokuapp.com/get/config/' + getShopName() + '?timer=' + timerId, (response)=> {
+        let timerId = el.dataset.timerId;
+        getConfig('https://discount-timeout.herokuapp.com/get/timer/' + getShopName() + '?timer=' + timerId, (response)=> {
             let today = new Date();
             let timeout = new Date().setDate(today.getDate() + 3);
 

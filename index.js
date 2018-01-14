@@ -169,6 +169,14 @@ app.get('/delete/data/:shop', (request, response)=> {
     })
 })
 
+app.get('/get/timer/:shop', (request, response)=> {
+    var shopName = request.params.shop;
+    var timer = request.query.timer;
+    db.getTimerConfig(shopName, timer, (data)=> {
+        response.send(JSON.stringify(data))
+    })
+})
+
 
 // Instruct app to listen to port
 app.listen(port, () => {

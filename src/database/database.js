@@ -21,6 +21,14 @@ function deleteShopConfig(name, callback)
     })
 }
 
+function getTimerConfig(name, timer, callback)
+{
+    connect.ref(`shop/${name}/timers`).once('value', function(snapshot) {
+        var timers = snapshot.val();
+        callback(timers[timer])
+    });
+}
+
 module.exports = {
     getShopConfig,
     setShopConfig,
