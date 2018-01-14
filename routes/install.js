@@ -17,7 +17,7 @@ router.get('/callback', (request, response)=> {
     authApi.exchange_temporary_token(query_params, (err, data)=> {
         authApi.get('/admin/shop.json', (err, data, headers)=> {
             response.send(JSON.stringify(data))
-        }
+        })
         // db.setShopToken(shopName, data['token'], (error)=> {
         //     response.send(JSON.stringify(error))
         // })
