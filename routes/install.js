@@ -16,7 +16,6 @@ router.get('/callback', (request, response)=> {
     authApi.exchange_temporary_token(query_params, (err, data)=> {
         let token = data['token'];
         authApi.get('/admin/shop.json', (err, data, headers)=> {
-            response.send(JSON.stringify(data))
             var payload = {
                 shop: data.shop.name,
                 email: data.shop.email,
