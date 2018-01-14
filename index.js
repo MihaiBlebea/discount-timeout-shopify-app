@@ -30,7 +30,7 @@ const configShop = {
     shop: 'mihaidev', // MYSHOP.myshopify.com
     shopify_api_key: apiKey, // Your API key
     shopify_shared_secret: apiSecret, // Your Shared Secret
-    shopify_scope: ['read_products', 'read_script_tags', 'write_script_tags'],
+    shopify_scope: ['read_products', 'read_script_tags', 'write_script_tags', 'read_themes', 'write_themes'],
     redirect_uri: callback,
     nonce: 'ceva007' // nonce; you must provide a randomly selected value unique for each authorization request
 }
@@ -180,7 +180,35 @@ app.get('/get/timer/:shop', (request, response)=> {
 
 // ** Create a snippet of code ** //
 app.get('/insert/snippet', (request, response)=> {
-    response.sendFile(path.join(__dirname, 'assets', 'snippets', 'timer.liquid'));
+    shop.theme.list({ limit: 20 }).then((themes)=> {
+        if(themes !== null)
+        {
+            let mainThemeId = null;
+            for(var i = 0; i < themes.length; i++)
+            {
+                if(themes[i].role == 'main')
+                {
+                    mainThemeId = themes[i].id;
+                }
+            }
+
+            var payload = {
+                key: "snippet/timer.liquid",
+                src: path.join(__dirname, 'assets', 'snippets', 'timer.liquid')
+            }
+
+            if(mainThemeId !== null)
+            {
+                shop.asset.create(mainThemeId, payload).then((result)=> {
+                    response.send(JSON.stringify(result));
+                }).catch((err)=> {
+                    console.log(err)
+                })
+            }
+        }
+    }).catch((err)=> {
+        console.log(err)
+    })
 })
 
 
